@@ -59,7 +59,7 @@ final class DayTests {
         #expect(Day98.input.isEmpty)
         #expect(d98.part1() == 98)
         #expect(d98.part2() == "test")
-        #expect(d98.title.isEmpty)
+        #expect(d98.title == "Day 98")
 
         let d98b = Day98(input: Day98.input)
         #expect(d98b.day == "98")
