@@ -18,18 +18,26 @@ public struct Point3: Hashable, Sendable {
     }
 
     @inlinable
-    public func add(_ point: Point3) -> Point3 {
-        Point3(x + point.x, y + point.y, z + point.z)
+    public static func + (_ lhs: Point3, _ rhs: Point3) -> Point3 {
+        Point3(
+            lhs.x + rhs.x,
+            lhs.y + rhs.y,
+            lhs.z + rhs.z
+        )
     }
 
     @inlinable
-    public static func + (_ lhs: Point3, _ rhs: Point3) -> Point3 {
-        lhs.add(rhs)
+    public static func += (_ lhs: inout Point3, _ rhs: Point3) {
+        lhs = lhs + rhs
     }
 
     @inlinable
     public static func * (_ lhs: Point3, _ rhs: Int) -> Point3 {
-        Point3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs)
+        Point3(
+            lhs.x * rhs,
+            lhs.y * rhs,
+            lhs.z * rhs
+        )
     }
 
     // manhattan distance
@@ -161,7 +169,7 @@ extension Point3 {
         case .all: offsets = Self.allOffsets
         }
 
-        return offsets.map { add($0) }
+        return offsets.map { self + $0 }
     }
 }
 
