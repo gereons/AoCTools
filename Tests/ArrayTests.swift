@@ -18,21 +18,40 @@ struct ArrayTests {
     }
 
     @Test func testChunkBy() throws {
-        var numbers = [10, 20, 30, 10, 40, 40, 10, 20]
-        var chunks = numbers.chunked(by: { $0 <= $1 })
+        var numbers = [1]
+        #expect(numbers.chunked(by: { $0 <= $1 }) == [[1]])
+
+        #expect([Int]().chunked(by: { $0 <= $1 }).isEmpty)
+
+        numbers = [10, 20, 30, 10, 40, 40, 10, 20]
+        var chunks = numbers.chunked { $0 <= $1 }
         #expect(chunks == [[10, 20, 30], [10, 40, 40], [10, 20]])
 
         numbers = [10, 20, 30]
-        chunks = numbers.chunked(by: { $0 <= $1 })
+        chunks = numbers.chunked { $0 <= $1 }
         #expect(chunks == [[10, 20, 30]])
 
         numbers = [30, 20, 10]
-        chunks = numbers.chunked(by: { $0 <= $1 })
+        chunks = numbers.chunked { $0 <= $1 }
         #expect(chunks == [[30], [20], [10]])
 
         numbers = [10, 40, 40, 10]
-        chunks = numbers.chunked(by: { $0 <= $1 })
+        chunks = numbers.chunked { $0 <= $1 }
         #expect(chunks == [[10, 40, 40], [10]])
+
+        numbers = [ 1, 2, 3, 5, 6 ]
+        chunks = numbers.chunked { $1 - $0 == 1 }
+        #expect(chunks == [[1, 2, 3], [5, 6]])
+    }
+
+    @Test func testGroupBy() throws {
+        var numbers = [2, 3, 4]
+        var groups = numbers.grouped { !$0.isMultiple(of: 2) }
+        #expect(groups == [[2], [4]])
+
+        numbers = []
+        groups = numbers.grouped { !$0.isMultiple(of: 2) }
+        #expect(groups.isEmpty)
     }
 
     @Test func testSort() throws {

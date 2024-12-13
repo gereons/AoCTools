@@ -6,6 +6,7 @@
 
 extension Array {
     public func chunked(by condition: (Element, Element) -> Bool) -> [[Element]] {
+        guard !isEmpty else { return [] }
         var result = [[Element]]()
         var tmp = [Element]()
         for index in 0 ..< self.count - 1 {
