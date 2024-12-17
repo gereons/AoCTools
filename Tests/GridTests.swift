@@ -99,4 +99,28 @@ struct GridTests {
         let s = grid.points.draw(xRange: grid.xRange, yRange: grid.yRange)
         #expect(s.joined(separator: "\n") == input)
     }
+
+    @Test func testInitDict() throws {
+        let points: [Point: Character] = [Point(0, 0): "O", Point(1, 1): "X"]
+        let grid = Grid(points: points)
+        #expect(grid.points.count == 2)
+        #expect(grid.minX == 0)
+        #expect(grid.maxX == 1)
+        #expect(grid.minY == 0)
+        #expect(grid.maxY == 1)
+        let s = grid.points.draw(xRange: grid.xRange, yRange: grid.yRange)
+        #expect(s.joined(separator: "\n") == "O.\n.X")
+    }
+
+    @Test func testInitPoints() throws {
+        let points = [Point(0, 0), Point(1, 1)]
+        let grid = Grid(points: points)
+        #expect(grid.points.count == 2)
+        #expect(grid.minX == 0)
+        #expect(grid.maxX == 1)
+        #expect(grid.minY == 0)
+        #expect(grid.maxY == 1)
+        let s = grid.points.draw(xRange: grid.xRange, yRange: grid.yRange)
+        #expect(s.joined(separator: "\n") == "#.\n.#")
+    }
 }

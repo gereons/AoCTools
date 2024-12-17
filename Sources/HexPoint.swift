@@ -8,18 +8,13 @@
 public protocol HexDirection {
     var offset: Hex.Point { get }
     var opposite: Self { get }
-    func turned(_ turn: Hex.Turn) -> Self
+    func turned(_ turn: Turn) -> Self
 }
 
 public enum Hex {
     public enum Orientation {
         case flat
         case pointy
-    }
-
-    public enum Turn {
-        case clockwise // "right"
-        case counterclockwise // "left"
     }
 
     public struct Point: Hashable, CustomStringConvertible, Sendable {
@@ -45,11 +40,6 @@ public enum Hex {
         }
 
         @inlinable
-        public func move(to direction: HexDirection) -> Point {
-            self + direction.offset
-        }
-
-        @inlinable
         public func distance(to point: Point = .zero) -> Int {
             (abs(q - point.q) + abs(r - point.r) + abs(s - point.s)) / 2
         }
@@ -61,9 +51,9 @@ public enum Hex {
         public func neighbors(orientation: Orientation) -> [Point] {
             switch orientation {
             case .flat:
-                return FlatDirection.allCases.map(\.offset)
+                return FlatDirection.allCases.map { self + $0.offset }
             case .pointy:
-                return PointyDirection.allCases.map(\.offset)
+                return PointyDirection.allCases.map { self + $0.offset }
             }
         }
 

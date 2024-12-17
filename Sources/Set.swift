@@ -9,8 +9,16 @@ extension Set {
         lhs.union(rhs)
     }
 
+    public static func += (lhs: inout Set, rhs: Set) {
+        lhs = lhs.union(rhs)
+    }
+
     public static func + (lhs: Set, rhs: Set.Element) -> Set {
         lhs.union([rhs])
+    }
+
+    public static func += (lhs: inout Set, rhs: Set.Element) {
+        lhs = lhs.union([rhs])
     }
 
     public static func - (lhs: Set, rhs: Set) -> Set {

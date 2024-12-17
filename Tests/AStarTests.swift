@@ -22,7 +22,7 @@ struct AStarTests {
             grid.draw()
         }
 
-        func neighbors(for point: Point) -> [Point] {
+        func neighbors(of point: Point) -> [Point] {
             point
                 .neighbors(adjacency: adjacency)
                 .filter {

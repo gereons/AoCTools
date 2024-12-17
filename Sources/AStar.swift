@@ -18,7 +18,7 @@ public protocol Pathfinding {
     /// Returns the eligible neighbors of `point`
     /// - Parameter for: the current coordinate
     /// - Returns: the eligible neighbors
-    func neighbors(for point: Coordinate) -> [Coordinate]
+    func neighbors(of point: Coordinate) -> [Coordinate]
 
     /// Return the "cost" to move from `from` to `to`
     /// - Parameters:
@@ -117,7 +117,7 @@ public final class AStarPathfinder<Map: Pathfinding> {
                 return Array(result.reversed().dropFirst())
             }
 
-            for neighbor in map.neighbors(for: currentCoordinate) {
+            for neighbor in map.neighbors(of: currentCoordinate) {
                 let moveCost = map.costToMove(from: currentCoordinate, to: neighbor)
                 let newcost = currentNode.gScore + moveCost
 

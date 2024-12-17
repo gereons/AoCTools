@@ -22,6 +22,11 @@ public struct Point: Hashable, Sendable {
     }
 
     @inlinable
+    public static func + (_ lhs: Point, _ rhs: Direction) -> Point {
+        Point(lhs.x + rhs.offset.x, lhs.y + rhs.offset.y)
+    }
+
+    @inlinable
     public static func += (_ lhs: inout Point, _ rhs: Point) {
         lhs = lhs + rhs
     }
@@ -90,19 +95,7 @@ extension Point {
     }
 
     @inlinable
-    @available(*, deprecated, renamed: "moved(to:)")
-    public func moved(_ direction: Direction) -> Point {
-        self + direction.offset
-    }
-
-    @inlinable
     public func moved(to direction: Direction, steps: Int = 1) -> Point {
-        self + direction.offset * steps
-    }
-
-    @inlinable
-    @available(*, deprecated, renamed: "moved(to:steps:)")
-    public func moved(_ direction: Direction, steps: Int) -> Point {
         self + direction.offset * steps
     }
 

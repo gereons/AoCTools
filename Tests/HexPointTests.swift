@@ -39,20 +39,21 @@ struct HexPointTests {
     }
 
     @Test func testNeighbors() throws {
-        let zero = Hex.Point.zero
-        #expect(zero.neighbors(orientation: .pointy).count == 6)
-        #expect(zero.neighbors(orientation: .flat).count == 6)
+        let start = Hex.Point.zero.moved(to: .n).moved(to: .n).moved(to: .n)
+        #expect(start.distance(to: .zero) == 3)
 
-        for n in zero.neighbors(orientation: .pointy) {
-            #expect(n.distance(to: .zero) == 1)
-            let m = zero + n + n
-            #expect(m.distance(to: .zero) == 2)
+        let pointyMoved = Hex.Point.zero.moved(to: .e).moved(to: .e).moved(to: .e)
+        #expect(pointyMoved.distance(to: .zero) == 3)
+
+        #expect(start.neighbors(orientation: .pointy).count == 6)
+        #expect(start.neighbors(orientation: .flat).count == 6)
+
+        for n in start.neighbors(orientation: .pointy) {
+            #expect(n.distance(to: start) == 1)
         }
 
-        for n in zero.neighbors(orientation: .flat) {
-            #expect(n.distance(to: .zero) == 1)
-            let m = zero + n + n
-            #expect(m.distance(to: .zero) == 2)
+        for n in start.neighbors(orientation: .flat) {
+            #expect(n.distance(to: start) == 1)
         }
     }
 

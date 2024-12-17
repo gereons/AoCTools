@@ -30,6 +30,11 @@ public extension Drawable where Self == Bool {
     static var on: Character { "#" }
 }
 
+extension Character: Drawable {
+    public var draw: Character { self }
+    public static func value(for ch: Character) -> Self { ch }
+}
+
 extension Bool: Drawable {
     public var draw: Character { self ? Self.on : Self.off }
     public static func value(for ch: Character) -> Self {

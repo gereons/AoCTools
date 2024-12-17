@@ -1,8 +1,10 @@
 //
-//  Int+GCD.swift
+//  Int+Utils.swift
 //  
 //  Advent of Code Tools
 //
+
+import Foundation
 
 /// Greatest Common Divisor
 /// - Parameters:
@@ -21,4 +23,13 @@ public func gcd(_ m: Int, _ n: Int) -> Int {
 /// - Returns: the lowest common multiple of `m` and `n`
 public func lcm(_ m: Int, _ n: Int) -> Int {
     m / gcd(m, n) * n
+}
+
+/// Exponentiation
+/// - Parameters:
+///   - base: Int
+///   - exponent: Int
+/// - Returns: the result of `base` to the power of `exponent`
+public func pow(_ base: Int, _ exponent: Int) -> Int {
+    Int(Foundation.pow(Double(base), Double(exponent)))
 }

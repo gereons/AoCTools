@@ -5,6 +5,7 @@
 //
 
 extension Array {
+    // split an array into chunks so that for each chunk, `condition` is true
     public func chunked(by condition: (Element, Element) -> Bool) -> [[Element]] {
         guard !isEmpty else { return [] }
         var result = [[Element]]()
@@ -24,6 +25,7 @@ extension Array {
 }
 
 extension Array {
+    // split an array into groups that are separated at each element where `condition` is true
     public func grouped(by condition: (Element) -> Bool) -> [[Element]] {
         var tmp = [Element]()
         var result = [[Element]]()

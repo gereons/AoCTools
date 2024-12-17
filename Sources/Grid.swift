@@ -14,11 +14,14 @@ public struct Grid<Value: Drawable> {
     public var xRange: ClosedRange<Int> { minX ... maxX }
     public var yRange: ClosedRange<Int> { minY ... maxY }
 
+    public init(points: [Point]) where Value == Bool {
+        let map = Dictionary(points.map { ($0, true) }, uniquingKeysWith: { _, new in new })
+        self.init(points: map)
+    }
+
     public init(points: [Point: Value]) {
-        let minX = points.keys.min(of: \.x)!
-        let maxX = points.keys.max(of: \.x)!
-        let minY = points.keys.min(of: \.y)!
-        let maxY = points.keys.max(of: \.y)!
+        let (minX, maxX) = points.keys.minAndMax(of: \.x)!
+        let (minY, maxY) = points.keys.minAndMax(of: \.y)!
         self.init(points: points, minX: minX, maxX: maxX, minY: minY, maxY: maxY)
     }
 

@@ -15,6 +15,13 @@ struct SetTests {
         #expect(s1 + s2 == Set([1, 2, 3, 4]))
 
         #expect(s1 + 4 == Set([1, 2, 4]))
+
+        var s3 = Set([1, 2, 3])
+        s3 += 0
+        #expect(s3 == Set([1, 2, 3, 0]))
+
+        s3 += s2
+        #expect(s3 == Set([1, 2, 3, 0, 4]))
     }
 
     @Test func testSubtract() throws {

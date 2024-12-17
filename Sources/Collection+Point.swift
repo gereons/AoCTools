@@ -10,6 +10,7 @@ extension Collection {
     }
 }
 
+// read access 2D arrays using points as subscripts
 extension Collection where Element: Collection, Index == Int, Element.Index == Int {
     public subscript(_ index: Point) -> Element.Element {
         self[index.y][index.x]
@@ -20,6 +21,7 @@ extension Collection where Element: Collection, Index == Int, Element.Index == I
     }
 }
 
+// write access 2D arrays using points as subscripts
 extension MutableCollection where Element: MutableCollection, Index == Int, Element.Index == Int {
     public subscript(_ index: Point) -> Element.Element {
         get { self[index.y][index.x] }
