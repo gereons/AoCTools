@@ -32,6 +32,11 @@ public struct Point: Hashable, Sendable {
     }
 
     @inlinable
+    public static func += (_ lhs: inout Point, _ rhs: Direction) {
+        lhs = lhs + rhs
+    }
+
+    @inlinable
     public static func - (_ lhs: Point, _ rhs: Point) -> Point {
         Point(lhs.x - rhs.x, lhs.y - rhs.y)
     }

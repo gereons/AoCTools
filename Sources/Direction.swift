@@ -110,3 +110,18 @@ public enum Direction: String, CaseIterable, Sendable {
         }
     }
 }
+
+extension Direction: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .n: "^"
+        case .w: "<"
+        case .s: "v"
+        case .e: ">"
+        case .nw: "↖︎"
+        case .ne: "↗︎"
+        case .sw: "↙︎"
+        case .se: "↘︎"
+        }
+    }
+}

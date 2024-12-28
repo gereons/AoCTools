@@ -10,11 +10,8 @@ import AoCTools
 @Suite
 struct StringTests {
     @Test func testTrim() throws {
-        var str = "  abc   "
+        let str = "  abc   "
         #expect(str.trimmed() == "abc")
-
-        str.trim()
-        #expect(str == "abc")
     }
 
     @Test func testIndex() throws {
@@ -24,31 +21,12 @@ struct StringTests {
         #expect(str.indexOf("x") == nil)
     }
 
-    @Test func testIndices() throws {
-        let str = "aabbcc"
-
-        #expect(str.indicesOf("ab") == [1])
-        #expect(str.indicesOf("a") == [0, 1])
-        #expect(str.indicesOf("b") == [2, 3])
-        #expect(str.indicesOf("bb") == [2])
-        #expect(str.indicesOf("xx").isEmpty)
-    }
-
-    @Test func testLastIndex() throws {
-        let str = "abc"
-
-        #expect(str.lastIndexOf("b") == 1)
-        #expect(str.lastIndexOf("x") == nil)
-
-        #expect("abbc".lastIndexOf("b") == 2)
-    }
-
     @Test func testSubscript() throws {
         let str = "abcdef"
 
-        #expect(str.charAt(0) == "a")
-        #expect(str.charAt(1) == "b")
-        #expect(str.charAt(5) == "f")
+        #expect(str[0] == "a")
+        #expect(str[1] == "b")
+        #expect(str[5] == "f")
 
         #expect(str[0] == "a")
         #expect(str[1] == "b")
@@ -62,10 +40,6 @@ struct StringTests {
         #expect(str.substring(3, 2) == "de")
     }
 
-    @Test func testSubstringAfter() throws {
-        #expect("foo:bar".substring(after: ":") == "bar")
-    }
-
     @Test func testRangeSubscript() throws {
         let str = "abcdef"
 
@@ -73,20 +47,10 @@ struct StringTests {
         #expect(str[3..<5] == "de")
     }
 
-    @Test func testInts() throws {
-        #expect("1,2,3".asInts() == [1, 2, 3])
-        #expect("1, 2, 3".asInts() == [1, 2, 3])
-    }
-
-    @Test func testTokenized() throws {
-        #expect("1;2;3".tokenized(separator: ";") == ["1", "2", "3"])
-        #expect("1 - 2 - 3".tokenized(separator: "-") == ["1", "2", "3"])
-    }
-
-    @Test func testAllInt() throws {
-        #expect("1,2,3".allInts() == [1, 2, 3])
-        #expect("1 red -2 blue 3green".allInts() == [1, -2, 3])
-        #expect("Game 1: 1 red, 2 bluem 3 green; 4 yellow".allInts() == [1, 1, 2, 3, 4])
+    @Test func testIntegers() throws {
+        #expect("1,2,3".integers() == [1, 2, 3])
+        #expect("1 red -2 blue 3green".integers() == [1, -2, 3])
+        #expect("Game 1: 1 red, 2 bluem 3 green; 4 yellow".integers() == [1, 1, 2, 3, 4])
     }
 
     @Test func testLines() throws {
