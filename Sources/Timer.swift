@@ -5,13 +5,13 @@
 //
 
 import Foundation
+import Synchronization
 
-@MainActor
-public final class Timer {
+public struct Timer {
     private let start = Date().timeIntervalSinceReferenceDate
     private let name: String
 
-    private static var total: TimeInterval = 0
+    private static let total = Mutex<TimeInterval>(0)
 
     private static let formatter: NumberFormatter = {
         let fmt = NumberFormatter()
@@ -20,24 +20,21 @@ public final class Timer {
         return fmt
     }()
 
-    public init(_ day: String, fun: String = #function) {
+    public init(_ day: String, fun: String) {
         self.name = "Day \(day) \(fun)"
-    }
-
-    public static func time<Result>(_ day: String, name: String = "parse", closure: () -> Result) -> Result {
-        let timer = Timer(day, fun: name)
-        defer { timer.show() }
-        return closure()
     }
 
     public func show() {
         let elapsed = Date().timeIntervalSinceReferenceDate - start
-        Self.total += elapsed
+        Self.total.withLock {
+            $0 += elapsed
+        }
         print("\(name) took \(Self.formatted(elapsed))")
     }
 
     public static func showTotal() {
-        print("Total time: \(formatted(Self.total))")
+        let total = Self.total.withLock { $0 }
+        print("Total time: \(formatted(total))")
     }
 
     private static func formatted(_ interval: TimeInterval) -> String {

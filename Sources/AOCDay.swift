@@ -11,6 +11,7 @@ public protocol Runnable {
     func run()
 }
 
+@available(*, deprecated, message: "Use AdventOfCodeDay instead")
 public protocol AOCDay: Runnable {
     var day: String { get }
     var title: String { get }
