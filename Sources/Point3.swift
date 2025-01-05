@@ -32,6 +32,20 @@ public struct Point3: Hashable, Sendable {
     }
 
     @inlinable
+    public static func - (_ lhs: Point3, _ rhs: Point3) -> Point3 {
+        Point3(
+            lhs.x - rhs.x,
+            lhs.y - rhs.y,
+            lhs.z - rhs.z
+        )
+    }
+
+    @inlinable
+    public static func -= (_ lhs: inout Point3, _ rhs: Point3) {
+        lhs = lhs - rhs
+    }
+
+    @inlinable
     public static func * (_ lhs: Point3, _ rhs: Int) -> Point3 {
         Point3(
             lhs.x * rhs,
@@ -55,7 +69,7 @@ public struct Point3: Hashable, Sendable {
 
 // MARK: - rotation
 extension Point3 {
-    func rotateX(_ degrees: Int) -> Point3 {
+    public func rotateX(_ degrees: Int) -> Point3 {
         /*
          |1     0           0| |x|   |        x        |   |x'|
          |0   cos θ    −sin θ| |y| = |y cos θ − z sin θ| = |y'|
@@ -67,7 +81,7 @@ extension Point3 {
         return Point3(xNew, yNew, zNew)
     }
 
-    func rotateY(_ degrees: Int) -> Point3 {
+    public func rotateY(_ degrees: Int) -> Point3 {
         /*
          | cos θ    0   sin θ| |x|   | x cos θ + z sin θ|   |x'|
          |   0      1       0| |y| = |         y        | = |y'|
@@ -79,7 +93,7 @@ extension Point3 {
         return Point3(xNew, yNew, zNew)
     }
 
-    func rotateZ(_ degrees: Int) -> Point3 {
+    public func rotateZ(_ degrees: Int) -> Point3 {
         /*
          |cos θ   −sin θ   0| |x|   |x cos θ − y sin θ|   |x'|
          |sin θ    cos θ   0| |y| = |x sin θ + y cos θ| = |y'|
