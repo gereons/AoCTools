@@ -4,7 +4,7 @@
 //  Advent of Code Tools
 //
 
-public protocol AdventOfCodeDay {
+public protocol AdventOfCodeDay: Sendable {
     static var input: String { get }
 
     var day: String { get }
